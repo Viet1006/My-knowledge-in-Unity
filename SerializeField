@@ -1,0 +1,19 @@
+1) SerializeField có thể cho 1 field hiện ngoài inspector ngoài ra khi dùng hàm Instantiate thì giá trị đấy sẽ được lấy từ prefab mà nếu ko có thì giá trị đấy thì khi tạo sẽ ko có
+Ví dụ 
+using UnityEngine;
+// Lớp cơ sở các loại đạn
+public class BaseBullet : MonoBehaviour
+{
+    [SerializeField] protected BulletData bulletData;
+    [SerializeField] protected GameObject bullet;
+    [SerializeField] protected Animator animator;
+    [SerializeField] ParticleSystem explodeEffect;
+    [SerializeField] float damage;
+    bool isExplode;
+    public virtual void SpawnBullet(Vector3 initialPos,Quaternion initialQuaternion,Vector2 target,float damage)
+    {
+        Instantiate(bullet,initialPos,initialQuaternion);
+        this.damage = damage;
+    }
+}
+Nếu damage ko được [SerializeField] thì khi tạo 1 gameobject từ instantiate damage sẽ là 0 mặc dụ object chính từ prefab đã sửa
