@@ -1,0 +1,28 @@
+1) Khi thêm 1 method / action vào delegate / event thì khi đối tượng chứa method/action bị gọi Destroy trong unity thì đối tượng đó chưa bị GC thu hồi bì delegate/event
+  vẫn đang chứa tham chiếu đến nó và khi thực hiện delegate/event được gọi thì các method/action vẫn được gọi gây tốn memory  
+  Ví dụ:
+using UnityEngine;
+public class EventHolder : MonoBehaviour
+{
+    public static event System.Action Test;
+    void Start()
+    {
+        InvokeRepeating(nameof(DoAction),0,1); // Thực hiện lặp lại sau 1s
+    }
+    void DoAction()
+    {
+        Test?.Invoke();
+    }
+}
+public class TestAction : MonoBehaviour
+{
+    void Start()
+    {
+        EventHolder.Test +=Test;
+    }
+    void Test()
+    {
+        Debug.Log("hello");
+    }
+}
+Khi đối tượng chứa TestAction bị hủy thì vẫn tiếp tục in ra màn hình hello mỗi 1s
