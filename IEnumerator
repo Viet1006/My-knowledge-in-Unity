@@ -1,0 +1,26 @@
+1) Nếu Coroutine đang chạy thì disable đối tượng start hay chứa Coroutine đấy thì vẫn ko dừng , Nếu muốn dừng thì phải hủy đối tượng start nó
+2) Coroutine bị dừng nếu đối tượng gọi Start nó bị destroy chứ k phải đối tượng chứa nó
+Ví dụ :
+using System.Collections;
+using UnityEngine;
+
+public class Caller : MonoBehaviour
+{
+    public CoroutineHandler coroutineHandler;
+    void Start()
+    {
+        StartCoroutine(coroutineHandler.Test());
+    }
+}
+public class CoroutineHandler  : MonoBehaviour
+{
+    public IEnumerator Test()
+    {
+        while(true)
+        {
+            yield return null;
+            Debug.Log("Test");
+        }
+    }
+}
+Khi run game nếu Caller bị hủy thì Coroutine sẽ dừng và ko in ra Test nữa còn nếu hủy CoroutineHandler thì Coroutine vẫn tiếp tục chạy
