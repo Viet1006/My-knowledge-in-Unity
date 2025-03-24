@@ -1,9 +1,9 @@
-1) LayerMask.NameToLayer dùng để so sánh layer của Gameobject ví dụ :
+1) LayerMask.NameToLayer dùng để nhận về ID của layer từ 0-31 thường dùng so sánh layer của Gameobject ví dụ :
      if(bounceCount == 0 || collider.gameObject.layer != LayerMask.NameToLayer("Wall"))
       {
             bullet.HandleCollision();
       }
-2) LayerMask.GetMask dùng để nhận tất cả layer bằng name ví dụ : 
+2) LayerMask.GetMask dùng để lấy bismask của tất cả layer bằng name ví dụ: 
 if(!Physics2D.Raycast(transform.position,direction,distance/3,LayerMask.GetMask("Wall")+LayerMask.GetMask("Water")))
       {
             transform.position += distance/3 * (Vector3)direction.normalized;
