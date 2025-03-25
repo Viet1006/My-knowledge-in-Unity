@@ -2,3 +2,5 @@
 Ví dụ: object A (Layer A) và B (Layer B) va chạm với nhau nếu ContactCapture Layer của A hoặc B ko có nhau thì sẽ ko bên nào được gọi OnCollison hay Ontrigger mà chỉ có va chạm vật lý thôi
 2) CallBack Layer quyết định layer nào được gọi Oncollison, OnTrigger của chính object đó 
 Ví dụ: object A (Layer A) và B (Layer B) va chạm với nhau nếu CallBack Layer của A ko có B thì OnCollison , OnTrigger của A ko được gọi và B vẫn được gọi nếu CallBackLayer của B có A và va chạm vật lý vẫn được tính toán bình thường
+3) Include Layer để bao gồm các layer có thể va chạm với bản thân object đấy
+Ví dụ : object A (Layer A) và B (Layer B) va chạm với nhau nếu Layer A và B ko được tính trong collisionMatrix thì sẽ ko va chạm với nhau nhưng nếu có A có include B thì vẫn va chạm bình thường
