@@ -1,5 +1,6 @@
-1) Nếu Coroutine đang chạy thì disable đối tượng start hay chứa Coroutine đấy thì vẫn ko dừng , Nếu muốn dừng thì phải hủy đối tượng start nó
-2) Coroutine bị dừng nếu đối tượng gọi Start nó bị destroy chứ k phải đối tượng chứa nó
+1) Nếu Coroutine đang chạy thì disable đối tượng start hay chứa Coroutine đấy thì vẫn ko dừng , Nếu muốn dừng thì phải hủy đối tượng start nó 
+hoặc UnActive gameobject chứa đối tượng start nó
+2) Coroutine bị dừng nếu đối tượng gọi Start nó bị destroy hoặc unactive gameobjecj chứ k phải đối tượng chứa nó
 Ví dụ :
 using System.Collections;
 using UnityEngine;
