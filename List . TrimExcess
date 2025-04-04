@@ -1,0 +1,60 @@
+1. Cách List hoạt động về bộ nhớ
+Khi bạn sử dụng List<T>, nó quản lý bộ nhớ theo 2 giá trị:
+
+Count: Số phần tử thực sự đang chứa
+
+Capacity: Tổng số phần tử có thể chứa trước khi cần mở rộng
+
+Khi bạn xóa nhiều phần tử khỏi List, Count giảm nhưng Capacity vẫn giữ nguyên, dẫn đến lãng phí bộ nhớ.
+
+2. Tại sao cần TrimExcess()
+csharp
+Copy
+// Ví dụ:
+List<Button> buttons = new List<Button>(100); // Capacity = 100
+// Thêm 100 button
+for(int i = 0; i < 100; i++) buttons.Add(new Button());
+
+// Xóa 90 button
+for(int i = 0; i < 90; i++) buttons.RemoveAt(0);
+
+// Lúc này:
+// Count = 10
+// Capacity vẫn = 100 (lãng phí 90 slot bộ nhớ)
+Sau khi gọi TrimExcess():
+
+csharp
+Copy
+buttons.TrimExcess();
+// Count = 10
+// Capacity ≈ 10 (giảm xuống gần với Count)
+3. Khi nào nên dùng TrimExcess()
+Sau khi xóa một lượng lớn phần tử khỏi List
+
+Khi List sẽ không cần mở rộng trong tương lai gần
+
+Trước khi lưu trữ List lâu dài
+
+4. Khi nào KHÔNG nên dùng
+Nếu List sẽ được thêm phần tử ngay sau đó (vì sẽ phải mở rộng lại)
+
+Với List nhỏ (dưới 100 phần tử) - lợi ích không đáng kể
+
+Trong các vòng lặp hiệu suất cao
+
+5. Cách Unity xử lý với TrimExcess()
+Trong ví dụ về Button manager trước:
+
+csharp
+Copy
+if (buttons.Count < buttons.Capacity / 2)
+{
+    buttons.TrimExcess(); // Chỉ gọi khi thực sự cần
+}
+Lý do kiểm tra Count < Capacity / 2:
+
+Tránh gọi TrimExcess() quá thường xuyên
+
+Chỉ thực hiện khi thực sự lãng phí > 50% bộ nhớ
+
+6. So sánh hiệu suất
