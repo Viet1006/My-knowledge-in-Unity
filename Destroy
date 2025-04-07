@@ -1,0 +1,21 @@
+public override int InitEnemy()
+    {
+      *  Destroy(GetComponent<EnemyWithWeapon>());
+        enemyData = randomEnemyList.GetRandomEnemyData(); // Lấy enemy data ngẫu nhiên từ danh sách
+
+        AttackMethod attackMethod = randomEnemyList.GetRandomAttackMethod(); // Lấy random cách tấn công từ list
+        this.attackMethod = gameObject.AddComponent(attackMethod.GetAttackMethod()).GetComponent<AttackMethodEnemy>(); // Thêm cách tấn công cho enemy
+        GameObject weaponObject = attackMethod.GetRandomWeapon(transform); // Lấy random vũ khí từ cách tấn công
+
+        // Lấy tham chiếu đến weapon trong AttackMethod xong đó gán cho weaponobject lấy được
+     *   GetComponent<EnemyWithWeapon>().weapon = weaponObject.GetComponent<BaseWeapon>();
+        return base.InitEnemy();
+    }
+Ví dụ : Dòng (1*) chỉ đánh dấu component để hủy, nhưng chưa thực sự bị xóa.
+
+        Dòng (2*) vẫn truy cập được vào component (vì nó chưa bị hủy), nhưng đây là hành vi không an toàn và có thể gây lỗi khó phát hiện.
+- Tại sao weapon không được gán?
+   Nếu EnemyWithWeapon bị hủy (dù chưa xóa ngay), Unity có thể không áp dụng thay đổi (weapon = ...) vào component sắp bị hủy.
+
+    Hoặc, nếu GetComponent<EnemyWithWeapon>() trả về null (do đã bị đánh dấu hủy), bạn sẽ gặp lỗi NullReferenceException.
+- Cách khắc phục : DestroyImmediate(GetComponent<EnemyWithWeapon>()); // Hủy ngay lập tức (không khuyến khích)
