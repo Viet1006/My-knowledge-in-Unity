@@ -11,6 +11,7 @@ public override int InitEnemy()
      *   GetComponent<EnemyWithWeapon>().weapon = weaponObject.GetComponent<BaseWeapon>();
         return base.InitEnemy();
     }
+Ps: EnemyWithWeapon là lớp con của AttackMethodEnemy
 Ví dụ : Dòng (1*) chỉ đánh dấu component để hủy, nhưng chưa thực sự bị xóa.
 
         Dòng (2*) vẫn truy cập được vào component (vì nó chưa bị hủy), nhưng đây là hành vi không an toàn và có thể gây lỗi khó phát hiện.
