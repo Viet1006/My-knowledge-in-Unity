@@ -1,0 +1,3 @@
+1) Các layout thường sắp xếp các con không ngay lập tức nên nếu lấy vị trí con ở start , awake , OnEnale sẽ sai vị trí 
+ LayoutRebuilder.ForceRebuildLayoutImmediate(targetRectTransform); dùng lệnh này sẽ buộc layout build ngay lập tức các vị trí 
+  với targetRectTransform sẽ chứa 1 Layout Component
